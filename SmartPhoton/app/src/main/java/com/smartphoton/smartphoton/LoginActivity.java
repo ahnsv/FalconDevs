@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,16 +22,22 @@ import io.particle.android.sdk.utils.Async;
 import io.particle.android.sdk.utils.Toaster;
 public class LoginActivity extends Activity {
 
+    EditText password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        password = (EditText)findViewById(R.id.password);
+        password.setTransformationMethod(new PasswordTransformationMethod());
 
         findViewById(R.id.login_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final String email = ((EditText) findViewById(R.id.email)).getText().toString();
                 final String password = ((EditText) findViewById(R.id.password)).getText().toString();
+
 
                 // Don't:
                 AsyncTask task = new AsyncTask() {
